@@ -1,19 +1,23 @@
-import { useState } from 'react'
 import Home from './pages/Home'
 import Footer from './components/Footer'
- 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Login from './pages/Login';
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <Home/>
-      <h1 className='fs-1 text-primary'>Hello Asif</h1>
-      <Footer/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      
+    </Router>
   )
 }
 
