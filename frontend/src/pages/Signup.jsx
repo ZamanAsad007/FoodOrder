@@ -2,40 +2,56 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function Login() {
-  const [signin, setsignin] = useState({
+function Signup() {
+  const [signup, setSignup] =  useState({
+    name: "",
     email: "",
     password: "",
+    location: "",
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("http://localhost:3000/api/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: signin.email,
-        password: signin.password,
+        name: signup.name,
+        email: signup.email,
+        password: signup.password,
+        location: signup.location,
       }),
     });
     const json = await response.json();
     console.log(json);
 
     if (json.success) {
-      alert("Logged in Successfully");
+      alert("User Created Successfully");
     } else {
-      alert("Login Failed!");
+      alert("Error creating user!");
     }
   }
   function onchange(e) {
-    setsignin({ ...signin, [e.target.name]: e.target.value });
+    setSignup({ ...signup, [e.target.name]: e.target.value });
   }
+
   return (
     <>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-name"
+              id="name"
+              placeholder="Enter Your Name"
+              name="name"
+              value={signup.name}
+              onChange={onchange}
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -44,7 +60,7 @@ export default function Login() {
               id="email"
               placeholder="Enter Your Email"
               name="email"
-              value={signin.email}
+              value={signup.email}
               onChange={onchange}
             />
           </div>
@@ -56,19 +72,32 @@ export default function Login() {
               id="password"
               placeholder="Password"
               name="password"
-              value={signin.password}
+              value={signup.password}
               onChange={onchange}
             />
           </div>
-          
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <input
+              type="text"
+              className="form-location"
+              id="location"
+              placeholder="Enter Your Location"
+              name="location"
+              value={signup.location}
+              onChange={onchange}
+            />
+          </div>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          <Link to="/signup" className="m-3 btn btn-danger">
-            New User? Signup
+          <Link to="/login" className="">
+            Aready a User?
           </Link>
         </form>
       </div>
     </>
   );
 }
+
+export default Signup;
