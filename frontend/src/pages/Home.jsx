@@ -108,31 +108,38 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="container">
+      <div className="container py-4">
         {foodcat.length > 0
-          ? foodcat.map((data) => {
+          ? foodcat.map((data, categoryIndex) => {
               return (
-                <div>
-                  <div key={data.id}>{data.CategoryName}</div>
-                  <hr />
-                  {fooditem.length > 0
-                    ? fooditem
-                        .filter(
-                          (item) => (item.CategoryName === data.CategoryName)
-                          && (item.name.toLowerCase().includes(search.toLocaleLowerCase()))
-                        ) 
-                        .map((item) => (
-                          <div key={item.id}>
-                            <Card
-                              foodname={item.name}
-                              description={item.description}
-                              options={item.options[0]}
-                              imgsrc={item.img}
-                            />
-                          </div>
-                        ))
-                    : null}
-                </div>
+                <section
+                  className="mb-5"
+                  key={data._id ?? data.id ?? `${data.CategoryName}-${categoryIndex}`}
+                >
+                  <h4 className="category-title mb-2">{data.CategoryName}</h4>
+                  <hr className="category-divider" />
+
+                  <div className="row g-4">
+                    {fooditem.length > 0
+                      ? fooditem
+                          .filter(
+                            (item) =>
+                              item.CategoryName === data.CategoryName &&
+                              item.name
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase())
+                          )
+                          .map((item, itemIndex) => (
+                            <div
+                              className="col-12 col-sm-6 col-md-4 col-lg-3"
+                              key={item._id ?? item.id ?? `${item.name}-${itemIndex}`}
+                            >
+                              <Card foodItem={item} options={item.options[0]} />
+                            </div>
+                          ))
+                      : null}
+                  </div>
+                </section>
               );
             })
           : ""}
