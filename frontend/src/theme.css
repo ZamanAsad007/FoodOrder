@@ -166,3 +166,36 @@ a:hover {
 .footer-premium {
   background: rgba(15, 17, 20, 0.6);
 }
+
+/* Auth (Login/Signup) */
+.auth-card {
+  max-width: 520px;
+}
+
+.auth-title {
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 700;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: rgba(244, 241, 234, 0.9);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--text);
+}
+
+.auth-link {
+  color: rgba(198, 192, 179, 0.9);
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  color: var(--text);
+  text-decoration: underline;
+}

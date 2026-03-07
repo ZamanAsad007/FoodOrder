@@ -1,9 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function Signup() {
-  const [signup, setSignup] =  useState({
+  const navigate = useNavigate();
+  const [signup, setSignup] = useState({
     name: "",
     email: "",
     password: "",
@@ -38,63 +40,90 @@ function Signup() {
 
   return (
     <>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-name"
-              id="name"
-              placeholder="Enter Your Name"
-              name="name"
-              value={signup.name}
-              onChange={onchange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              className="form-email"
-              id="email"
-              placeholder="Enter Your Email"
-              name="email"
-              value={signup.email}
-              onChange={onchange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="Password">Password</label>
-            <input
-              type="password"
-              className="form-password"
-              id="password"
-              placeholder="Password"
-              name="password"
-              value={signup.password}
-              onChange={onchange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              className="form-location"
-              id="location"
-              placeholder="Enter Your Location"
-              name="location"
-              value={signup.location}
-              onChange={onchange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-          <Link to="/login" className="">
-            Aready a User?
-          </Link>
-        </form>
+      <div>
+        <Navbar />
+      </div>
+      <div className="container py-5">
+        <div className="card premium-card p-4 mx-auto auth-card">
+          <h3 className="auth-title mb-4">Create account</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="name">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control premium-input"
+                id="name"
+                placeholder="Enter Your Name"
+                name="name"
+                value={signup.name}
+                onChange={onchange}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control premium-input"
+                id="email"
+                placeholder="Enter Your Email"
+                name="email"
+                value={signup.email}
+                onChange={onchange}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control premium-input"
+                id="password"
+                placeholder="Password"
+                name="password"
+                value={signup.password}
+                onChange={onchange}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label" htmlFor="location">
+                Location
+              </label>
+              <input
+                type="text"
+                className="form-control premium-input"
+                id="location"
+                placeholder="Enter Your Location"
+                name="location"
+                value={signup.location}
+                onChange={onchange}
+              />
+            </div>
+
+            <div className="d-flex gap-2 align-items-center">
+              <button type="submit" className="btn btn-accent">
+                Sign up
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => navigate(-1)}
+              >
+                Back
+              </button>
+              <Link to="/login" className="auth-link ms-auto">
+                Already a user?
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
